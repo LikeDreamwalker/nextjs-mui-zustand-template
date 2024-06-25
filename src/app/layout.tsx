@@ -45,7 +45,7 @@ export default function RootLayout({
                 <CustomAppBar title="nextjs-mui-zustand-template"></CustomAppBar>
                 <Box
                   sx={{
-                    position: "flex",
+                    display: "flex",
                     flex: "1 1 auto",
                     flexWrap: "nowrap",
                     alignContent: "flex-start",
@@ -53,7 +53,7 @@ export default function RootLayout({
                   }}
                 >
                   <MenuList></MenuList>
-                  <Box>{children}</Box>
+                  {children}
                 </Box>
               </Box>
             </CssVarsProvider>

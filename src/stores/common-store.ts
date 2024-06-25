@@ -46,16 +46,16 @@ export const createCommonStore = (
       set({ helloName: newhelloName });
     },
     editHelloOptions: (newHelloOptions: helloOptions) => {
-      set({ helloOptions: newHelloOptions });
+      set({ helloOptions: { ...get().helloOptions, ...newHelloOptions } });
     },
     generateHelloString: (string) => {
       const { helloName, helloOptions } = get();
       const greetings = helloName ? `Hello, ${helloName}!` : "Hello, there!";
       const wishContent = `${
         helloOptions.haveAGoodDay ? " Have a good day." : ""
-      }${helloOptions.haveAGoodNight ? " Have a good night." : ""}!`;
+      }${helloOptions.haveAGoodNight ? " Have a good night." : ""}`;
       return string
-        ? `${greetings}${wishContent} and ${string}`
+        ? `${greetings}${wishContent} ${string}`
         : `${greetings}${wishContent}`;
     },
   }));

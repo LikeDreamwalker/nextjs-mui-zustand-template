@@ -15,7 +15,7 @@ export default function SelectedListItem() {
   return (
     <Box
       sx={{
-        width: { xs: "80%", md: "20%" },
+        width: { xs: "40%", md: "20%" },
         height: "100%",
         bgcolor: "background.paper",
         borderRight: 1,
