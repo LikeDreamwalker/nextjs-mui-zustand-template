@@ -37,7 +37,7 @@ export default function WelcomePage() {
         >
           <TextField
             id="standard-password-input"
-            label="Your name"
+            label="Say something"
             variant="standard"
             value={helloString}
             onChange={(event) => {
