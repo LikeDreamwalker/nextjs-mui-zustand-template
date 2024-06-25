@@ -1,6 +1,6 @@
 ## nextjs-mui-zustand-template
 
-A themplate for a Next.js project with Material-UI and Zustand.
+A template for a Next.js project with Material-UI and Zustand.
 
 - Based on [App Router](https://nextjs.org/docs/app/building-your-application/routing/defining-routes)
 - Uses RSC and normal client-side components
