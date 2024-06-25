@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ThemeButton from "../ThemeButton";
+import zIndex from "@mui/material/styles/zIndex";
 
 type AppBarProps = {
   title?: string;
@@ -13,8 +14,8 @@ type AppBarProps = {
 
 export default function CustomAppBar({ title = "AppBar" }: AppBarProps) {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box sx={{ flex: "0 0 auto" }}>
+      <AppBar position="fixed" sx={{ zIndex: 10 }}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {title}

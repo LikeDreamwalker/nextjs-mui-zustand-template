@@ -1,9 +1,10 @@
-import { CssBaseline, Box } from "@mui/material";
+import { CssBaseline, Box, Toolbar } from "@mui/material";
 import { Experimental_CssVarsProvider as CssVarsProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import getInitColorSchemeScript from "@mui/system/cssVars/getInitColorSchemeScript";
 import type { Metadata } from "next";
 import CustomAppBar from "@/components/AppBar";
+import MenuList from "@/components/MenuList";
 
 import { CommonStoreProvider } from "@/providers/common-store-provider";
 import theme from "../theme";
@@ -33,13 +34,27 @@ export default function RootLayout({
               <CssBaseline />
               <Box
                 sx={{
-                  minHeight: "100vh",
+                  height: "100vh",
                   width: "100vw",
                   overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
+                <Toolbar></Toolbar>
                 <CustomAppBar title="nextjs-mui-zustand-template"></CustomAppBar>
-                <Box>{children}</Box>
+                <Box
+                  sx={{
+                    position: "flex",
+                    flex: "1 1 auto",
+                    flexWrap: "nowrap",
+                    alignContent: "flex-start",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <MenuList></MenuList>
+                  <Box>{children}</Box>
+                </Box>
               </Box>
             </CssVarsProvider>
           </AppRouterCacheProvider>
