@@ -5,9 +5,11 @@ import getInitColorSchemeScript from "@mui/system/cssVars/getInitColorSchemeScri
 import type { Metadata } from "next";
 import CustomAppBar from "@/components/AppBar";
 import MenuList from "@/components/MenuList";
-
 import { CommonStoreProvider } from "@/providers/common-store-provider";
-import theme from "../theme";
+import theme from "@/theme";
+import { Locale } from "@/library/intl";
+import { getI18nString } from "@/library/api";
+
 export const metadata: Metadata = {
   title: "nextjs-mui-zustand-template",
   description: "Next.js + MUI + Zustand template",
@@ -15,9 +17,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: { lang: Locale };
 }>) {
+  console.log(params, "?>?>?>params");
+  const appBarTitle = "";
+  // const appBarTitle = getI18nString({
+  //   locale: params.lang,
+  //   texts: ["common.app-bar.title"],
+  // });
   return (
     <html lang="en">
       <body>
@@ -42,7 +52,7 @@ export default function RootLayout({
                 }}
               >
                 <Toolbar></Toolbar>
-                <CustomAppBar title="nextjs-mui-zustand-template"></CustomAppBar>
+                <CustomAppBar title={appBarTitle}></CustomAppBar>
                 <Box
                   sx={{
                     display: "flex",

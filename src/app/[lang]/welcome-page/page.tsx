@@ -2,18 +2,38 @@
 import { Box, Card, TextField, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useCommonStore } from "@/providers/common-store-provider";
-import { useState } from "react";
-export default function WelcomePage() {
+import { useEffect, useState } from "react";
+import { Locale } from "@/library/intl";
+// import { getI18nString } from "@/library/api";
+interface Props {
+  params: {
+    lang: Locale;
+  };
+}
+
+export default function WelcomePage({ params: { lang: locale } }: Props) {
   const { generateHelloString } = useCommonStore((store) => ({
     generateHelloString: store.generateHelloString,
     helloName: store.helloName,
     editHelloName: store.editHelloName,
   }));
   const [helloString, setString] = useState("And welcome to the template!");
+  // const [i18nStrings, setI18nStrings] = useState({});
 
+  // const targetI18nStrings = {
+
+  // }
+  // const getI18nStringFunc = async () => {
+  //   const res = await getI18nString({ locale, texts: ["hello"] });
+  //   setI18nStrings(res);
+  // };
+
+  // useEffect(() => {
+  //   getI18nStringFunc();
+  //   // Assuming you want this to run when `locale` changes
+  // }, [locale]);
   return (
     <Box
-      className="Home"
       sx={{
         display: "flex",
         flexDirection: "row",

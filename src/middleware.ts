@@ -27,6 +27,7 @@ function getLocale(request: NextRequest): string | undefined {
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
+  // It is a must cause seems like "/" is not able to use in [lang] route
   const fallbackPage = "home";
 
   // Check if there is any supported locale in the pathname

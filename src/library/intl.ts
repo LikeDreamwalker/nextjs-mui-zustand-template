@@ -1,4 +1,4 @@
-import "server-only";
+// import "server-only";
 import { i18n } from "../../i18n-config";
 import { createIntl } from "@formatjs/intl";
 export type Locale = (typeof i18n)["locales"][number];
