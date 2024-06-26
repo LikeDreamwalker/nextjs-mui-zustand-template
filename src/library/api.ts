@@ -1,11 +1,5 @@
-export async function getI18nString({
-  locale,
-  texts,
-}: {
-  locale: string;
-  texts: Array<string>;
-}) {
-  const res = await fetch(`/${locale}/api/get_i18n_string`, {
+export async function getI18nString(texts: Array<string>) {
+  const res = await fetch("/api/get_i18n_string", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

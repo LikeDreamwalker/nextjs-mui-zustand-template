@@ -4,7 +4,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { useCommonStore } from "@/providers/common-store-provider";
 import { useEffect, useState } from "react";
 import { Locale } from "@/library/intl";
-// import { getI18nString } from "@/library/api";
+import { getI18nString } from "@/library/api";
 interface Props {
   params: {
     lang: Locale;
@@ -18,20 +18,15 @@ export default function WelcomePage({ params: { lang: locale } }: Props) {
     editHelloName: store.editHelloName,
   }));
   const [helloString, setString] = useState("And welcome to the template!");
-  // const [i18nStrings, setI18nStrings] = useState({});
 
-  // const targetI18nStrings = {
+  useEffect(() => {
+    setTimeout(() => {
+      const res = getI18nString(["common.app-bar.title"]);
+      console.log(res, "?>?>?>?>UERES");
+    }, 2000);
 
-  // }
-  // const getI18nStringFunc = async () => {
-  //   const res = await getI18nString({ locale, texts: ["hello"] });
-  //   setI18nStrings(res);
-  // };
-
-  // useEffect(() => {
-  //   getI18nStringFunc();
-  //   // Assuming you want this to run when `locale` changes
-  // }, [locale]);
+    // Assuming you want this to run when `locale` changes
+  }, [locale]);
   return (
     <Box
       sx={{

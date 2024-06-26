@@ -5,6 +5,8 @@ import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 
 import { i18n } from "../i18n-config";
+import { getIntl, Locale } from "@/library/intl";
+import { IntlShape } from "@formatjs/intl";
 
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
@@ -18,13 +20,25 @@ function getLocale(request: NextRequest): string | undefined {
   let languages = new Negotiator({ headers: negotiatorHeaders }).languages(
     locales
   );
-
-  const locale = matchLocale(languages, locales, i18n.defaultLocale);
-
+  const locale: string = matchLocale(languages, locales, i18n.defaultLocale);
   return locale;
 }
 
-export function middleware(request: NextRequest) {
+export let globalIntl = {} as IntlShape<string>;
+export let globalLocale = "" as Locale | string;
+export function getGlobalIntl() {
+  return globalIntl;
+}
+
+export async function middleware(request: NextRequest) {
+  const locale = getLocale(request);
+  console.log(locale, "locale");
+  if ((locale && globalLocale !== locale) || (locale && !globalIntl)) {
+    globalLocale = locale;
+    globalIntl = await getIntl(locale as Locale | "");
+  }
+  console.log(globalIntl, "globalIntl222");
+
   const pathname = request.nextUrl.pathname;
 
   // It is a must cause seems like "/" is not able to use in [lang] route
@@ -38,8 +52,6 @@ export function middleware(request: NextRequest) {
 
   // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
-    const locale = getLocale(request);
-
     const sanitizedPathname = pathname.startsWith("/")
       ? pathname.substring(1)
       : pathname;
