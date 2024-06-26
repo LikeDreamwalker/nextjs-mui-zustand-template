@@ -20,10 +20,8 @@ export default function WelcomePage({ params: { lang: locale } }: Props) {
   const [helloString, setString] = useState("And welcome to the template!");
 
   useEffect(() => {
-    setTimeout(() => {
-      const res = getI18nString(["common.app-bar.title"]);
-      console.log(res, "?>?>?>?>UERES");
-    }, 2000);
+    const res = getI18nString(["common.app-bar.title"]);
+    console.log(res, "?>?>?>?>UERES");
 
     // Assuming you want this to run when `locale` changes
   }, [locale]);

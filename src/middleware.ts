@@ -32,12 +32,12 @@ export function getGlobalIntl() {
 
 export async function middleware(request: NextRequest) {
   const locale = getLocale(request);
-  console.log(locale, "locale");
+  // console.log(locale, "locale");
   if ((locale && globalLocale !== locale) || (locale && !globalIntl)) {
     globalLocale = locale;
     globalIntl = await getIntl(locale as Locale | "");
   }
-  console.log(globalIntl, "globalIntl222");
+  // console.log(globalIntl, "globalIntl222");
 
   const pathname = request.nextUrl.pathname;
 
@@ -73,9 +73,18 @@ export async function middleware(request: NextRequest) {
       new URL(`${sanitizedPathname}/${fallbackPage}`, request.url)
     );
   }
+
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-pathname", request.nextUrl.pathname);
+
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
 }
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ["/((?!api|_next/static|_next/image|images|favicon.ico).*)"],
+  matcher: ["/((?!_next/static|_next/image|images|favicon.ico).*)"],
 };
