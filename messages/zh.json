@@ -1,0 +1,15 @@
+{
+  "Index": {
+    "inputLabel": "你的名字"
+  },
+  "WelcomePage": {
+    "inputLabel": "说点什么吧"
+  },
+  "Common": {
+    "appBarTitle": "nextjs-mui-zustand-template | 来自 LikeDreamwalker",
+    "menuList": {
+      "Index": "首页",
+      "WelcomePage": "欢迎"
+    }
+  }
+}

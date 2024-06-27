@@ -21,7 +21,6 @@ export default function ThemeButton() {
 
   return (
     <IconButton
-      size="large"
       onClick={() => {
         if (mode === "light") {
           setMode("dark");

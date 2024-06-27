@@ -1,0 +1,15 @@
+{
+  "Index": {
+    "inputLabel": "Your name"
+  },
+  "WelcomePage": {
+    "inputLabel": "Say something"
+  },
+  "Common": {
+    "appBarTitle": "nextjs-mui-zustand-template | By LikeDreamwalker",
+    "menuList": {
+      "Index": "Home",
+      "WelcomePage": "Welcome"
+    }
+  }
+}

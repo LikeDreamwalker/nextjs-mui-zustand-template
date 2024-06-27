@@ -8,10 +8,12 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import HomeIcon from "@mui/icons-material/Home";
 import GrainIcon from "@mui/icons-material/Grain";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname } from "@/library/navigation";
+import { useTranslations } from "next-intl";
 export default function SelectedListItem() {
   const router = useRouter();
   const pathname = usePathname();
+  const t = useTranslations("Common.menuList");
   return (
     <Box
       sx={{
@@ -32,7 +34,7 @@ export default function SelectedListItem() {
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
-          <ListItemText primary="Index" />
+          <ListItemText primary={t("Index")} />
         </ListItemButton>
         <ListItemButton
           selected={pathname === "/welcome-page"}
@@ -43,7 +45,7 @@ export default function SelectedListItem() {
           <ListItemIcon>
             <GrainIcon />
           </ListItemIcon>
-          <ListItemText primary="Welcome Page" />
+          <ListItemText primary={t("WelcomePage")} />
         </ListItemButton>
       </List>
       <Divider />

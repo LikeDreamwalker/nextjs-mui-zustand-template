@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useCommonStore } from "@/providers/common-store-provider";
+import { useTranslations } from "next-intl";
 export default function Home() {
   const { helloName, helloOptions, editHelloName, editHelloOptions } =
     useCommonStore((store) => ({
@@ -22,6 +23,7 @@ export default function Home() {
       [name]: value,
     });
   };
+  const t = useTranslations("Index");
   return (
     <Box
       className="Home"
@@ -41,7 +43,7 @@ export default function Home() {
         <Grid xs={12}>
           <TextField
             id="standard-password-input"
-            label="Your name"
+            label={t("inputLabel")}
             variant="standard"
             value={helloName}
             onChange={(event) => {

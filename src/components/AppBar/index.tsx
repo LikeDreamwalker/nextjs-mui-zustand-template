@@ -2,11 +2,8 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import ThemeButton from "../ThemeButton";
-import zIndex from "@mui/material/styles/zIndex";
+import LocaleButton from "@/components/LocaleButton";
 
 type AppBarProps = {
   title?: string;
@@ -21,6 +18,7 @@ export default function CustomAppBar({ title = "AppBar" }: AppBarProps) {
             {title}
           </Typography>
           <ThemeButton />
+          <LocaleButton />
         </Toolbar>
       </AppBar>
     </Box>
