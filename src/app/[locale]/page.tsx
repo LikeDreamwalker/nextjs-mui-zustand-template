@@ -24,7 +24,6 @@ export default function Home() {
     });
   };
   const t = useTranslations("Index");
-  console.log(t("title"));
   return (
     <Box
       className="Home"
@@ -44,7 +43,7 @@ export default function Home() {
         <Grid xs={12}>
           <TextField
             id="standard-password-input"
-            label="Your name"
+            label={t("inputLabel")}
             variant="standard"
             value={helloName}
             onChange={(event) => {

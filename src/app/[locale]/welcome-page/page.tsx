@@ -3,6 +3,7 @@ import { Box, Card, TextField, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useCommonStore } from "@/providers/common-store-provider";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 export default function WelcomePage() {
   const { generateHelloString } = useCommonStore((store) => ({
     generateHelloString: store.generateHelloString,
@@ -10,7 +11,7 @@ export default function WelcomePage() {
     editHelloName: store.editHelloName,
   }));
   const [helloString, setString] = useState("And welcome to the template!");
-
+  const t = useTranslations("WelcomePage");
   return (
     <Box
       className="Home"
@@ -37,7 +38,7 @@ export default function WelcomePage() {
         >
           <TextField
             id="standard-password-input"
-            label="Say something"
+            label={t("inputLabel")}
             variant="standard"
             value={helloString}
             onChange={(event) => {

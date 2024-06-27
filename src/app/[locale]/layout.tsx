@@ -8,6 +8,7 @@ import MenuList from "@/components/MenuList";
 import { CommonStoreProvider } from "@/providers/common-store-provider";
 import theme from "../../theme";
 import { NextIntlClientProvider } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { getMessages } from "next-intl/server";
 export const metadata: Metadata = {
   title: "nextjs-mui-zustand-template",
@@ -22,6 +23,7 @@ export default async function RootLayout({
   params: { locale: string };
 }) {
   const messages = await getMessages();
+  const t = await getTranslations("Common");
   return (
     <html lang="en">
       <body>
@@ -47,7 +49,7 @@ export default async function RootLayout({
                   }}
                 >
                   <Toolbar></Toolbar>
-                  <CustomAppBar title="nextjs-mui-zustand-template"></CustomAppBar>
+                  <CustomAppBar title={t("appBarTitle")}></CustomAppBar>
                   <Box
                     sx={{
                       display: "flex",
