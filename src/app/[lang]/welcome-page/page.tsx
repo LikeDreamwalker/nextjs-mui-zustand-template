@@ -19,12 +19,13 @@ export default function WelcomePage({ params: { lang: locale } }: Props) {
   }));
   const [helloString, setString] = useState("And welcome to the template!");
 
-  useEffect(() => {
-    const res = getI18nString(["common.app-bar.title"]);
-    console.log(res, "?>?>?>?>UERES");
-
-    // Assuming you want this to run when `locale` changes
-  }, [locale]);
+  // const requestI18n = async () => {
+  //   const res = await getI18nString(["common.app-bar.title"]);
+  //   console.log(res, "?>?>?>?>UERES");
+  // };
+  // useEffect(() => {
+  //   requestI18n();
+  // }, []);
   return (
     <Box
       sx={{

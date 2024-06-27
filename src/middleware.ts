@@ -15,7 +15,7 @@ function getLocale(request: NextRequest): string | undefined {
   return locale;
 }
 
-let cachedPathLocale = "";
+export let cachedPathLocale = "";
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -29,7 +29,7 @@ export async function middleware(request: NextRequest) {
     const sanitizedPathname = pathname.startsWith("/")
       ? pathname.substring(1)
       : pathname;
-
+    console.log(finalPathLocale, "API18n");
     return NextResponse.redirect(
       new URL(
         `/${finalPathLocale}/${sanitizedPathname || fallbackPage}`,
@@ -55,6 +55,7 @@ export async function middleware(request: NextRequest) {
   cachedPathLocale = finalPathLocale;
   const needRedirect = finalPathLocale !== currentPathLocale;
   // Redirect if there is no locale
+  console.log(needRedirect, "?>?>?>needRedirect", finalPathLocale);
   if (needRedirect) {
     const sanitizedPathname = pathname.startsWith("/")
       ? pathname.substring(1)
@@ -70,6 +71,7 @@ export async function middleware(request: NextRequest) {
 
   // Redirect if there is no page
   const pathnameIsMissingPage = pathname.split("/").slice(2).join("/") === "";
+  console.log(pathnameIsMissingPage, "?>?>?>pathnameIsMissingPage");
   if (pathnameIsMissingPage) {
     const sanitizedPathname = pathname.endsWith("/")
       ? pathname.substring(0, pathname.length - 1)
@@ -78,7 +80,7 @@ export async function middleware(request: NextRequest) {
       new URL(`${sanitizedPathname}/${fallbackPage}`, request.url)
     );
   }
-
+  console.log("next");
   return NextResponse.next({
     request: {
       // headers: requestHeaders,
