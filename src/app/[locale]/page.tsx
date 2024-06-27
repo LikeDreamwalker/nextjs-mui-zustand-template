@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useCommonStore } from "@/providers/common-store-provider";
+import { useTranslations } from "next-intl";
 export default function Home() {
   const { helloName, helloOptions, editHelloName, editHelloOptions } =
     useCommonStore((store) => ({
@@ -22,6 +23,8 @@ export default function Home() {
       [name]: value,
     });
   };
+  const t = useTranslations("Index");
+  console.log(t("title"));
   return (
     <Box
       className="Home"
