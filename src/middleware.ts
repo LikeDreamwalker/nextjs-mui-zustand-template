@@ -1,22 +1,13 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-
+import { NextResponse, NextRequest } from "next/server";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
-
 import { i18n } from "../i18n-config";
-import { getIntl, Locale } from "@/library/intl";
-import { IntlShape } from "@formatjs/intl";
 
 function getLocale(request: NextRequest): string | undefined {
-  // Negotiator expects plain object so we need to transform headers
   const negotiatorHeaders: Record<string, string> = {};
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
-  // @ts-ignore locales are readonly
-  const locales: string[] = i18n.locales;
-
-  // Use negotiator and intl-localematcher to get best locale
+  const locales = [...i18n.locales]; // Copy to mutable array if necessary
   let languages = new Negotiator({ headers: negotiatorHeaders }).languages(
     locales
   );
@@ -24,67 +15,78 @@ function getLocale(request: NextRequest): string | undefined {
   return locale;
 }
 
-export let globalIntl = {} as IntlShape<string>;
-export let globalLocale = "" as Locale | string;
-export function getGlobalIntl() {
-  return globalIntl;
-}
+let cachedPathLocale = "";
 
 export async function middleware(request: NextRequest) {
-  const locale = getLocale(request);
-  // console.log(locale, "locale");
-  if ((locale && globalLocale !== locale) || (locale && !globalIntl)) {
-    globalLocale = locale;
-    globalIntl = await getIntl(locale as Locale | "");
-  }
-  // console.log(globalIntl, "globalIntl222");
-
   const pathname = request.nextUrl.pathname;
-
-  // It is a must cause seems like "/" is not able to use in [lang] route
   const fallbackPage = "home";
+  const userNetworkLocale = getLocale(request);
 
-  // Check if there is any supported locale in the pathname
-  const pathnameIsMissingLocale = i18n.locales.every(
-    (locale: any) =>
-      !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
-  );
-
-  // Redirect if there is no locale
-  if (pathnameIsMissingLocale) {
+  // For the i18n request, we always based on the cached locale
+  if (request.nextUrl.pathname.startsWith("/api/get_i18n_string")) {
+    const finalPathLocale =
+      cachedPathLocale || userNetworkLocale || i18n.defaultLocale;
     const sanitizedPathname = pathname.startsWith("/")
       ? pathname.substring(1)
       : pathname;
 
     return NextResponse.redirect(
-      new URL(`/${locale}/${sanitizedPathname || fallbackPage}`, request.url)
+      new URL(
+        `/${finalPathLocale}/${sanitizedPathname || fallbackPage}`,
+        request.url
+      )
+    );
+  }
+  // For normal API, we do nothing
+  if (request.nextUrl.pathname.startsWith("/api")) {
+    return NextResponse.next();
+  }
+
+  // For normal scenarios, we redirect the related pages to locale/page
+  // Get current path locale
+  const currentPathLocale =
+    i18n.locales.find(
+      (locale: any) =>
+        pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+    ) || "";
+  console.log(currentPathLocale, "currentPathLocale");
+  const finalPathLocale =
+    currentPathLocale || userNetworkLocale || i18n.defaultLocale;
+  cachedPathLocale = finalPathLocale;
+  const needRedirect = finalPathLocale !== currentPathLocale;
+  // Redirect if there is no locale
+  if (needRedirect) {
+    const sanitizedPathname = pathname.startsWith("/")
+      ? pathname.substring(1)
+      : pathname;
+
+    return NextResponse.redirect(
+      new URL(
+        `/${finalPathLocale}/${sanitizedPathname || fallbackPage}`,
+        request.url
+      )
     );
   }
 
-  const pathnameIsMissingPage = pathname.split("/").slice(2).join("/") === "";
-
   // Redirect if there is no page
+  const pathnameIsMissingPage = pathname.split("/").slice(2).join("/") === "";
   if (pathnameIsMissingPage) {
     const sanitizedPathname = pathname.endsWith("/")
       ? pathname.substring(0, pathname.length - 1)
       : pathname;
-
     return NextResponse.redirect(
       new URL(`${sanitizedPathname}/${fallbackPage}`, request.url)
     );
   }
 
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-pathname", request.nextUrl.pathname);
-
   return NextResponse.next({
     request: {
-      headers: requestHeaders,
+      // headers: requestHeaders,
     },
   });
 }
 
 export const config = {
-  // Matcher ignoring `/_next/` and `/api/`
+  // Matcher ignoring `/_next/`
   matcher: ["/((?!_next/static|_next/image|images|favicon.ico).*)"],
 };
