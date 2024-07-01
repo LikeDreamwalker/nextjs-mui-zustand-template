@@ -10,6 +10,8 @@ import theme from "../../theme";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { getMessages } from "next-intl/server";
+import { Suspense } from "react";
+import Loading from "@/app/[locale]/loading";
 export const metadata: Metadata = {
   title: "nextjs-mui-zustand-template",
   description: "Next.js + MUI + Zustand template",
@@ -60,7 +62,9 @@ export default async function RootLayout({
                     }}
                   >
                     <MenuList></MenuList>
-                    {children}
+                    <Suspense fallback={<Loading></Loading>}>
+                      {children}
+                    </Suspense>
                   </Box>
                 </Box>
               </CssVarsProvider>
