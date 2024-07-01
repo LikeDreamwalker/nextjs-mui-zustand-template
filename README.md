@@ -1,5 +1,6 @@
 ## nextjs-mui-zustand-template
-[Live Demo](https://nextjs-mui-zustand-template.ldwid.com/) 
+
+[Live Demo](https://nextjs-mui-zustand-template.ldwid.com/)
 
 A template for a Next.js project with Material-UI and Zustand.
 
@@ -10,6 +11,7 @@ A template for a Next.js project with Material-UI and Zustand.
 - Uses next-intl to support i18n
 - Uses community solution to support SSR Dark Mode
 - Uses CSS-in-JS for styling(which is the default for Material-UI)
+- Uses `<Suspense/>` and `loading.tsx` to render mui's linear progress component while route loading
 - Has examples of RSC between client-side components, layout codes, reactive state, and dark mode
 
 ```json
