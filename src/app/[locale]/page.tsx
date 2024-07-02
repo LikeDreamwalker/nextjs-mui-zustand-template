@@ -10,13 +10,19 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { useCommonStore } from "@/providers/common-store-provider";
 import { useTranslations } from "next-intl";
 export default function Home() {
-  const { helloName, helloOptions, editHelloName, editHelloOptions } =
-    useCommonStore((store) => ({
-      helloName: store.helloName,
-      helloOptions: store.helloOptions,
-      editHelloName: store.editHelloName,
-      editHelloOptions: store.editHelloOptions,
-    }));
+  const {
+    helloName,
+    helloOptions,
+    editHelloName,
+    editHelloOptions,
+    iWantItAll,
+  } = useCommonStore((store) => ({
+    helloName: store.helloName,
+    helloOptions: store.helloOptions,
+    editHelloName: store.editHelloName,
+    editHelloOptions: store.editHelloOptions,
+    iWantItAll: store.iWantItAll,
+  }));
   const handleChange = ({ name, value }: { name: string; value: any }) => {
     editHelloOptions({
       ...helloOptions,
@@ -81,6 +87,17 @@ export default function Home() {
                 />
               }
               label="Have a good night!"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={helloOptions.nestedClickers.all}
+                  onChange={() => {
+                    iWantItAll(!helloOptions.nestedClickers.all);
+                  }}
+                />
+              }
+              label="I want it all!"
             />
           </FormGroup>
         </Grid>
