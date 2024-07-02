@@ -8,6 +8,7 @@ A template for a Next.js project with Material-UI and Zustand.
 - Uses RSC and normal client-side components
 - Uses Material-UI for styling
 - Uses Zustand for state management, and has a Out-of-the-box store
+  - Also uses Immer to enhance the store
 - Uses next-intl to support i18n
 - Uses community solution to support SSR Dark Mode
 - Uses CSS-in-JS for styling(which is the default for Material-UI)
