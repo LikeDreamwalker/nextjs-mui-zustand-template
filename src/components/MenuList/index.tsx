@@ -10,7 +10,11 @@ import HomeIcon from "@mui/icons-material/Home";
 import GrainIcon from "@mui/icons-material/Grain";
 import { useRouter, usePathname } from "@/library/navigation";
 import { useTranslations } from "next-intl";
-export default function SelectedListItem({ sx }: { sx?: object }) {
+type Props = {
+  sx?: object;
+  onClickItem?: () => void;
+};
+export default function SelectedListItem({ sx, onClickItem }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const t = useTranslations("Common.menuList");
@@ -30,6 +34,9 @@ export default function SelectedListItem({ sx }: { sx?: object }) {
           selected={pathname === "/"}
           onClick={(event) => {
             router.push("/");
+            if (onClickItem) {
+              onClickItem();
+            }
           }}
         >
           <ListItemIcon>
@@ -41,6 +48,9 @@ export default function SelectedListItem({ sx }: { sx?: object }) {
           selected={pathname === "/welcome-page"}
           onClick={(event) => {
             router.push("/welcome-page");
+            if (onClickItem) {
+              onClickItem();
+            }
           }}
         >
           <ListItemIcon>

@@ -67,6 +67,7 @@ export default function CustomAppBar({ title = "AppBar" }: AppBarProps) {
         </Toolbar>
       </AppBar>
       <Box sx={{ width: { xs: 0, sm: "20vw" }, flexShrink: { sm: 0 } }}>
+        {/* For Mobile */}
         <Drawer
           variant="temporary"
           open={mobileOpen}
@@ -84,8 +85,9 @@ export default function CustomAppBar({ title = "AppBar" }: AppBarProps) {
             },
           }}
         >
-          <MenuList></MenuList>
+          <MenuList onClickItem={handleDrawerClose}></MenuList>
         </Drawer>
+        {/* For landscape phones and normal desktops */}
         <Drawer
           variant="permanent"
           sx={{
