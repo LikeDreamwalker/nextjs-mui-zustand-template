@@ -10,18 +10,19 @@ import HomeIcon from "@mui/icons-material/Home";
 import GrainIcon from "@mui/icons-material/Grain";
 import { useRouter, usePathname } from "@/library/navigation";
 import { useTranslations } from "next-intl";
-export default function SelectedListItem() {
+export default function SelectedListItem({ sx }: { sx?: object }) {
   const router = useRouter();
   const pathname = usePathname();
   const t = useTranslations("Common.menuList");
   return (
     <Box
       sx={{
-        width: { xs: "40%", md: "20%" },
+        width: "100%",
         height: "100%",
         bgcolor: "background.paper",
         borderRight: 1,
         borderColor: "divider",
+        ...sx,
       }}
     >
       <List component="nav">

@@ -47,24 +47,32 @@ export default async function RootLayout({
                     width: "100vw",
                     overflow: "hidden",
                     display: "flex",
-                    flexDirection: "column",
                   }}
                 >
-                  <Toolbar></Toolbar>
-                  <CustomAppBar title={t("appBarTitle")}></CustomAppBar>
                   <Box
                     sx={{
                       display: "flex",
-                      flex: "1 1 auto",
-                      flexWrap: "nowrap",
+                      flex: "0 0 100vw",
+                      height: "100vh",
+                      flexWrap: "npwrap",
                       alignContent: "flex-start",
                       justifyContent: "space-between",
                     }}
                   >
-                    <MenuList></MenuList>
-                    <Suspense fallback={<Loading></Loading>}>
-                      {children}
-                    </Suspense>
+                    <CustomAppBar title={t("appBarTitle")}></CustomAppBar>
+                    <Box
+                      sx={{
+                        flexGrow: 1,
+                        width: "100%",
+                        height: "100%",
+                        overflowY: "auto",
+                      }}
+                    >
+                      <Toolbar></Toolbar>
+                      <Suspense fallback={<Loading></Loading>}>
+                        {children}
+                      </Suspense>
+                    </Box>
                   </Box>
                 </Box>
               </CssVarsProvider>
