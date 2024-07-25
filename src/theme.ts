@@ -63,5 +63,5 @@ let theme = extendTheme({
   },
 });
 
-theme = responsiveFontSizes(theme);
+theme = responsiveFontSizes(theme) as typeof theme;
 export default theme;
