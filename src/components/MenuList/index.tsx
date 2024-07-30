@@ -8,7 +8,15 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import HomeIcon from "@mui/icons-material/Home";
 import GrainIcon from "@mui/icons-material/Grain";
-import { useRouter, usePathname } from "@/library/navigation";
+
+import { usePathname } from "@/library/navigation";
+// If we are trying to use the useRouter hook from next/router
+// We will receive an issue like:
+// Error: NextRouter was not mounted. https://nextjs.org/docs/messages/next-router-not-mounted
+// import { useRouter } from "next/router";
+// But using from next-intl will be okay
+import { useRouter } from "@/library/navigation";
+
 import { useTranslations } from "next-intl";
 type Props = {
   sx?: object;
