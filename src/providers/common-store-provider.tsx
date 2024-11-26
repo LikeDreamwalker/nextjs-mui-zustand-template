@@ -19,7 +19,7 @@ export interface CommonStoreProviderProps {
 }
 
 export const CommonStoreProvider = ({ children }: CommonStoreProviderProps) => {
-  const storeRef = useRef<StoreApi<CommonStore>>();
+  const storeRef = useRef<StoreApi<CommonStore>>(undefined);
   if (!storeRef.current) {
     storeRef.current = createCommonStore(initCommonStore());
   }
