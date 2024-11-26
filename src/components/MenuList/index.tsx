@@ -8,7 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import HomeIcon from "@mui/icons-material/Home";
 import GrainIcon from "@mui/icons-material/Grain";
-import { useRouter, usePathname } from "@/library/navigation";
+import { useRouter, usePathname } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 type Props = {
   sx?: object;

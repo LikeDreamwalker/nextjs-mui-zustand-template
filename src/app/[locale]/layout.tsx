@@ -10,28 +10,29 @@ import theme from "../../theme";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { getMessages } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { routing } from "@/i18n/routing";
 import { Suspense } from "react";
 import Loading from "@/app/[locale]/loading";
+
 export const metadata: Metadata = {
   title: "nextjs-mui-zustand-template",
   description: "Next.js + MUI + Zustand template",
 };
 
-export default async function RootLayout(
-  props: {
-    children: React.ReactNode;
-    params: Promise<{ locale: string }>;
-  }
-) {
+export default async function RootLayout(props: {
+  children: React.ReactNode;
+  params: { locale: string };
+}) {
   const params = await props.params;
 
-  const {
-    locale
-  } = params;
+  const { locale } = params;
 
-  const {
-    children
-  } = props;
+  const { children } = props;
+
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
 
   const messages = await getMessages();
   const t = await getTranslations("Common");

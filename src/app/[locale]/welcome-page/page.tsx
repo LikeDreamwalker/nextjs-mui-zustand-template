@@ -1,6 +1,6 @@
 "use client";
 import { Box, Card, TextField, Typography } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2";
+import Grid from "@mui/material/Grid2";
 import { useCommonStore } from "@/providers/common-store-provider";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
@@ -29,7 +29,7 @@ export default function WelcomePage() {
     >
       <Grid container>
         <Grid
-          xs={12}
+          size={{ xs: 12 }}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -50,7 +50,7 @@ export default function WelcomePage() {
           />
         </Grid>
         <Grid
-          xs={12}
+          size={{ xs: 12 }}
           sx={{
             display: "flex",
             justifyContent: "center",
