@@ -1,12 +1,10 @@
 import { CssBaseline, Box, Toolbar } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import getInitColorSchemeScript from "@mui/system/cssVars/getInitColorSchemeScript";
 import type { Metadata } from "next";
 import CustomAppBar from "@/components/AppBar";
-import MenuList from "@/components/MenuList";
 import { CommonStoreProvider } from "@/providers/common-store-provider";
-import theme from "../../theme";
+import theme from "@/theme";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { getMessages } from "next-intl/server";
@@ -43,13 +41,6 @@ export default async function RootLayout(props: {
           <AppRouterCacheProvider options={{ key: "css" }}>
             <NextIntlClientProvider messages={messages}>
               <ThemeProvider theme={theme} defaultMode="system">
-                {getInitColorSchemeScript({
-                  // From https://github.com/mui/material-ui/issues/39010#issuecomment-1896674887
-                  attribute: "data-mui-color-scheme",
-                  modeStorageKey: "mui-mode",
-                  colorSchemeStorageKey: "mui-color-scheme",
-                  defaultMode: "system",
-                })}
                 <CssBaseline />
                 <Box
                   sx={{
