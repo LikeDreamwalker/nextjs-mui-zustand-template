@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { IconButton, Menu, MenuItem } from "@mui/material";
-import LanguageIcon from "@mui/icons-material/Language"; // Importing a language icon
-import { fullRenderLocales } from "@/i18n";
-import { useRouter, usePathname } from "@/library/navigation";
+import LanguageIcon from "@mui/icons-material/Language";
+import { fullRenderLocales } from "@/i18n/routing";
+import { useRouter, usePathname } from "@/i18n/routing";
 const LocaleButton = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const pathname = usePathname();

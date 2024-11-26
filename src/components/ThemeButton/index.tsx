@@ -29,11 +29,7 @@ export default function ThemeButton() {
         }
       }}
     >
-      {mode === "dark" ? (
-        <Brightness7Icon />
-      ) : (
-        <Brightness4Icon color="secondary" />
-      )}
+      {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
     </IconButton>
   );
 }

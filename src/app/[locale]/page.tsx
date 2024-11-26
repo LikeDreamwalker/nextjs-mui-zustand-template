@@ -6,7 +6,7 @@ import {
   FormGroup,
   TextField,
 } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2";
+import Grid from "@mui/material/Grid2";
 import { useCommonStore } from "@/providers/common-store-provider";
 import { useTranslations } from "next-intl";
 export default function Home() {
@@ -46,7 +46,7 @@ export default function Home() {
       }}
     >
       <Grid container>
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           <TextField
             id="standard-password-input"
             label={t("inputLabel")}
@@ -58,7 +58,7 @@ export default function Home() {
             fullWidth
           />
         </Grid>
-        <Grid xs={12} sx={{ mt: 2 }}>
+        <Grid size={{ xs: 12 }} sx={{ mt: 2 }}>
           <FormGroup>
             <FormControlLabel
               control={
