@@ -1,8 +1,5 @@
 "use client";
-import {
-  experimental_extendTheme as extendTheme,
-  responsiveFontSizes,
-} from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
@@ -11,7 +8,10 @@ const roboto = Roboto({
   display: "swap",
 });
 
-let theme = extendTheme({
+let theme = createTheme({
+  cssVariables: {
+    colorSchemeSelector: "class",
+  },
   colorSchemes: {
     light: {
       palette: {

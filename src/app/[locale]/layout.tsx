@@ -1,5 +1,5 @@
 import { CssBaseline, Box, Toolbar } from "@mui/material";
-import { Experimental_CssVarsProvider as CssVarsProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import getInitColorSchemeScript from "@mui/system/cssVars/getInitColorSchemeScript";
 import type { Metadata } from "next";
@@ -42,7 +42,7 @@ export default async function RootLayout(props: {
         <CommonStoreProvider>
           <AppRouterCacheProvider options={{ key: "css" }}>
             <NextIntlClientProvider messages={messages}>
-              <CssVarsProvider theme={theme} defaultMode="system">
+              <ThemeProvider theme={theme} defaultMode="system">
                 {getInitColorSchemeScript({
                   // From https://github.com/mui/material-ui/issues/39010#issuecomment-1896674887
                   attribute: "data-mui-color-scheme",
@@ -85,7 +85,7 @@ export default async function RootLayout(props: {
                     </Box>
                   </Box>
                 </Box>
-              </CssVarsProvider>
+              </ThemeProvider>
             </NextIntlClientProvider>
           </AppRouterCacheProvider>
         </CommonStoreProvider>
